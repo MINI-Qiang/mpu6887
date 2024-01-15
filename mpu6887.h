@@ -1,9 +1,10 @@
 # ifndef __MPU6887_H__
 # define __MPU6887_H__
+
 # include <Arduino.h>
+#include <Wire.h>
 
-
-#define MPU6887_ADDR 0x68  //A0 LOW 0X68  A0 HIGH 0X69
+#define MPU6887_ADDRESS 0x68  //A0 LOW 0X68  A0 HIGH 0X69
 #define MPU6887_DEVICE_ID         (0x2E)
 
 /********* REGISTERS ADDRESS *************/
@@ -94,7 +95,7 @@
 #define GYRO_AXIS_DIR     {1, 2, 3}
 
 #define MAX_I2C_RESTORE_SCL_CNT       (8 * 32)
-#define PI 3.1415926535
+///#define PI 3.1415926535
 #define ACC_FILTER                    (0.8)
 #define TILT_ANGLE_FILTER             (0.4)
 #define TILT_RANGE_GAIN               (0.2588) // cos(75)
@@ -125,21 +126,25 @@ class mpu6887
 private:
     /* data */
 public:
-    mpu6887(/* args */);
-    ~mpu6887();
+    mpu6887();
+    //~mpu6887();
+    void begin();
     void init();
-    void read();
+    uint8_t getDeviceID(); //获取设备ID
+    
+    int16_t  ACCEL_X();  //加速度X轴实时数据
+    int16_t  ACCEL_Y();  //加速度Y轴实时数据
+    int16_t  ACCEL_Z();  //加速度Z轴实时数据
+    int16_t  GYRO_X();   //陀螺仪X轴实时数据
+    int16_t  GYRO_Y();   //陀螺仪Y轴实时数据
+    int16_t  GYRO_Z();   //陀螺仪Z轴实时数据
+    int16_t  TEMP();     //温度实时数据
+
+
+    //通用读写函数
+    void readBytes(uint8_t reg, uint8_t *buf, uint8_t len);  //读取数据
+    void writeBytes(uint8_t reg, uint8_t *buf, uint8_t len); //写入数据
 
 };
 
-mpu6887::mpu6887(/* args */)
-{
-    
-}
-
-mpu6887::~mpu6887()
-{
-}
-
-
-# elif
+# endif
