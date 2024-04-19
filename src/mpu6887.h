@@ -1,7 +1,7 @@
 # ifndef __MPU6887_H__
 # define __MPU6887_H__
 
-# include <Arduino.h>
+#include <Arduino.h>
 #include <Wire.h>
 
 #define MPU6887_ADDRESS 0x68  //A0 LOW 0X68  A0 HIGH 0X69
@@ -164,7 +164,8 @@ public:
     float  GYRO_Y_dps();   //陀螺仪Y轴实时数据dps值
     int16_t  GYRO_Z();   //陀螺仪Z轴实时数据原始ADC值
     float  GYRO_Z_dps();   //陀螺仪Z轴实时数据dps值
-    int16_t  TEMP();     //温度实时数据
+    int16_t  temperature_adc();     //温度实时数据
+    float  temperature();     //温度实时数据
 
 
     //通用读写函数

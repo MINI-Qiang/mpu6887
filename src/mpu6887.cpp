@@ -257,11 +257,17 @@ float mpu6887::GYRO_Z_dps()
     }
 }
 
-int16_t mpu6887::TEMP()
+int16_t mpu6887::temperature_adc()
 {
     uint8_t buf[2];
     readBytes(TEMP_OUT_H, buf, 2);
     return (((int16_t)buf[0]) << 8) | buf[1];
+}
+
+float mpu6887::temperature()
+{
+    return (float)temperature_adc() / 326.8 + 25;  // (TEMP_OUT[15:0]/Temp_Sensitivity) + RoomTemp_Offset 
+    //where Temp_Sensitivity = 326.8 LSB/ºC and RoomTemp_Offset = 25ºC 
 }
 
 void mpu6887::readBytes(uint8_t reg, uint8_t *buf, uint8_t len)
