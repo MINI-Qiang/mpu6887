@@ -14,6 +14,34 @@ void mpu6887::begin()
     writeBytes(PWR_MGMT_1, 0x00, 1);
 }
 
+//陀螺仪量程设置
+void mpu6887::GYRO_SCOPE_CONFIG(uint8_t FS_SEL)
+{
+    
+    //获取寄存器原始数据
+    uint8_t temp;
+    readBytes(GYRO_CONFIG, &temp, 1);
+    //修改bit位置为[4:3]
+    temp = (temp & 0b11100111) | (FS_SEL << 3);
+    //写入寄存器
+    writeBytes(GYRO_CONFIG, &temp, 1);
+
+}
+
+//加速度量程设置
+void mpu6887::ACCEL_SCOPE_CONFIG(uint8_t AFS_SEL)
+{
+    //获取寄存器原始数据
+    uint8_t temp;
+    readBytes(ACCEL_CONFIG, &temp, 1);
+    //修改bit位置为[4:3]
+    temp = (temp & 0b11100111) | (AFS_SEL << 3);
+    //写入寄存器
+    writeBytes(ACCEL_CONFIG, &temp, 1);
+}
+
+
+
 int16_t mpu6887::ACCEL_X()
 {
     uint8_t buf[2];

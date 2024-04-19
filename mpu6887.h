@@ -7,6 +7,17 @@
 #define MPU6887_ADDRESS 0x68  //A0 LOW 0X68  A0 HIGH 0X69
 #define MPU6887_DEVICE_ID         (0x2E)
 
+
+# define Gyro_250dps  0x00
+# define Gyro_500dps  0x01
+# define Gyro_1000dps 0x02
+# define Gyro_2000dps 0x03
+
+# define Accel_2G  0x00
+# define Accel_4G  0x01
+# define Accel_8G  0x02
+# define Accel_16G 0x03
+
 /********* REGISTERS ADDRESS *************/
 #define XG_OFFS_TC_H        0x04
 #define XG_OFFS_TC_L        0x05
@@ -131,7 +142,10 @@ public:
     void begin();
     void init();
     uint8_t getDeviceID(); //获取设备ID
-    
+
+    void GYRO_SCOPE_CONFIG(uint8_t FS_SEL = Gyro_250dps);//陀螺仪量程设置
+    void ACCEL_SCOPE_CONFIG(uint8_t AFS_SEL = Accel_2G);//加速度量程设置
+
     int16_t  ACCEL_X();  //加速度X轴实时数据
     int16_t  ACCEL_Y();  //加速度Y轴实时数据
     int16_t  ACCEL_Z();  //加速度Z轴实时数据
