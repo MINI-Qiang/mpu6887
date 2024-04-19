@@ -136,6 +136,9 @@ class mpu6887
 {
 private:
     /* data */
+    
+    uint8_t _AFS_SEL;  //当前加速度量程设置
+    uint8_t _FS_SEL;  //当前陀螺仪量程设置
 public:
     mpu6887();
     //~mpu6887();
@@ -146,12 +149,21 @@ public:
     void GYRO_SCOPE_CONFIG(uint8_t FS_SEL = Gyro_250dps);//陀螺仪量程设置
     void ACCEL_SCOPE_CONFIG(uint8_t AFS_SEL = Accel_2G);//加速度量程设置
 
-    int16_t  ACCEL_X();  //加速度X轴实时数据
-    int16_t  ACCEL_Y();  //加速度Y轴实时数据
-    int16_t  ACCEL_Z();  //加速度Z轴实时数据
-    int16_t  GYRO_X();   //陀螺仪X轴实时数据
-    int16_t  GYRO_Y();   //陀螺仪Y轴实时数据
-    int16_t  GYRO_Z();   //陀螺仪Z轴实时数据
+    //采样率设置
+
+
+    int16_t  ACCEL_X();  //加速度X轴实时数据原始ADC值
+    float  ACCEL_X_g();  //加速度X轴实时数据g值
+    int16_t  ACCEL_Y();  //加速度Y轴实时数据原始ADC值
+    float  ACCEL_Y_g();  //加速度Y轴实时数据g值
+    int16_t  ACCEL_Z();  //加速度Z轴实时数据原始ADC值
+    float  ACCEL_Z_g();  //加速度Z轴实时数据g值
+    int16_t  GYRO_X();   //陀螺仪X轴实时数据原始ADC值
+    float  GYRO_X_dps();   //陀螺仪X轴实时数据dps值
+    int16_t  GYRO_Y();   //陀螺仪Y轴实时数据原始ADC值
+    float  GYRO_Y_dps();   //陀螺仪Y轴实时数据dps值
+    int16_t  GYRO_Z();   //陀螺仪Z轴实时数据原始ADC值
+    float  GYRO_Z_dps();   //陀螺仪Z轴实时数据dps值
     int16_t  TEMP();     //温度实时数据
 
 
