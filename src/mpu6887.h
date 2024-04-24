@@ -18,6 +18,8 @@
 # define Accel_8G  0x02
 # define Accel_16G 0x03
 
+
+
 /********* REGISTERS ADDRESS *************/
 #define XG_OFFS_TC_H        0x04
 #define XG_OFFS_TC_L        0x05
